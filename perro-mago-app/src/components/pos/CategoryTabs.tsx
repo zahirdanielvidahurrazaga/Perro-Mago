@@ -20,7 +20,7 @@ export function CategoryTabs({ categories, activeCategory, onSelect }: CategoryT
       <button
         onClick={() => onSelect(null)}
         className={cn(
-          'px-4 py-2 text-sm font-medium rounded-full transition-all duration-200',
+          'px-4 py-2 md:py-2.5 text-sm font-medium rounded-full transition-all duration-200 min-h-[48px] md:min-h-0 flex items-center justify-center',
           !activeCategory
             ? 'bg-primary text-on-primary'
             : 'text-on-surface-variant hover:text-on-surface hover:bg-surface-container'
@@ -33,7 +33,7 @@ export function CategoryTabs({ categories, activeCategory, onSelect }: CategoryT
           key={cat.id}
           onClick={() => onSelect(cat.id)}
           className={cn(
-            'px-4 py-2 text-sm font-medium rounded-full transition-all duration-200 flex items-center gap-1.5',
+            'px-4 py-2 md:py-2.5 text-sm font-medium rounded-full transition-all duration-200 flex items-center gap-1.5 min-h-[48px] md:min-h-0',
             activeCategory === cat.id
               ? 'bg-primary text-on-primary'
               : 'text-on-surface-variant hover:text-on-surface hover:bg-surface-container'

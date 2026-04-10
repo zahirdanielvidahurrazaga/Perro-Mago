@@ -108,7 +108,7 @@ export function ModifierModal() {
                         )
                       }
                       className={cn(
-                        'px-4 py-2.5 rounded-full text-sm font-medium transition-all duration-200 min-h-[40px]',
+                        'px-5 py-3 rounded-full text-sm font-medium transition-all duration-200 min-h-[48px] flex items-center justify-center',
                         isSelected
                           ? 'bg-primary text-on-primary'
                           : 'bg-secondary-container text-on-secondary-container hover:brightness-110'

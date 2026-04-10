@@ -1,10 +1,15 @@
 import { useCartStore } from '../../stores/useCartStore';
 import { useUIStore } from '../../stores/useUIStore';
-import { formatCurrency } from '../../lib/utils';
+import { formatCurrency, cn } from '../../lib/utils';
 import { Button } from '../ui/Button';
-import { ShoppingBag, Trash2, Minus, Plus, Banknote } from 'lucide-react';
+import { ShoppingBag, Trash2, Minus, Plus, Banknote, X } from 'lucide-react';
 
-export function CartSidebar() {
+interface CartSidebarProps {
+  onClose?: () => void;
+  isMobile?: boolean;
+}
+
+export function CartSidebar({ onClose, isMobile }: CartSidebarProps = {}) {
   const items = useCartStore((s) => s.items);
   const updateQuantity = useCartStore((s) => s.updateQuantity);
   const removeItem = useCartStore((s) => s.removeItem);
@@ -20,21 +25,31 @@ export function CartSidebar() {
   const hasItems = items.length > 0;
 
   return (
-    <div className="w-80 bg-surface-container-low flex flex-col h-full shrink-0">
+    <div className={cn(
+      "bg-surface-container-low flex flex-col h-full shrink-0 shadow-2xl lg:shadow-none",
+      isMobile ? "w-full" : "w-80"
+    )}>
       {/* Header */}
-      <div className="px-5 py-4 flex items-center justify-between">
+      <div className="px-5 py-4 flex items-center justify-between border-b border-outline-variant/30">
         <div className="flex items-center gap-2">
           <ShoppingBag size={18} className="text-primary" />
           <h2 className="font-bold text-base text-on-surface">Orden Actual</h2>
         </div>
-        {hasItems && (
-          <button
-            onClick={clearCart}
-            className="text-xs text-on-surface-variant hover:text-error transition-colors"
-          >
-            Limpiar
-          </button>
-        )}
+        <div className="flex items-center gap-3">
+          {isMobile && (
+            <button onClick={onClose} className="p-1 -ml-1 text-on-surface-variant hover:text-on-surface hover:bg-surface-container rounded-lg">
+              <X size={20} />
+            </button>
+          )}
+          {hasItems && (
+            <button
+              onClick={clearCart}
+              className="text-xs font-semibold text-on-surface-variant hover:text-error transition-colors bg-surface-container px-2 py-1 rounded-md"
+            >
+              Vaciar
+            </button>
+          )}
+        </div>
       </div>
 
       {/* Items List */}
@@ -89,25 +104,25 @@ export function CartSidebar() {
                   <div className="flex items-center gap-1">
                     <button
                       onClick={() => updateQuantity(item.cartItemId, item.quantity - 1)}
-                      className="w-8 h-8 rounded-lg bg-surface-container flex items-center justify-center text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-colors"
+                      className="w-10 h-10 md:w-8 md:h-8 rounded-lg bg-surface-container flex items-center justify-center text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-colors active:scale-95"
                     >
-                      <Minus size={14} />
+                      <Minus size={16} />
                     </button>
                     <span className="w-8 text-center text-sm font-bold font-mono text-on-surface">
                       {item.quantity}
                     </span>
                     <button
                       onClick={() => updateQuantity(item.cartItemId, item.quantity + 1)}
-                      className="w-8 h-8 rounded-lg bg-surface-container flex items-center justify-center text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-colors"
+                      className="w-10 h-10 md:w-8 md:h-8 rounded-lg bg-surface-container flex items-center justify-center text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-colors active:scale-95"
                     >
-                      <Plus size={14} />
+                      <Plus size={16} />
                     </button>
                   </div>
                   <button
                     onClick={() => removeItem(item.cartItemId)}
-                    className="p-1.5 rounded-lg text-on-surface-variant hover:text-error hover:bg-error-container/20 transition-colors"
+                    className="p-2.5 md:p-1.5 rounded-lg text-on-surface-variant hover:text-error hover:bg-error-container/20 transition-colors"
                   >
-                    <Trash2 size={14} />
+                    <Trash2 size={18} className="md:w-3.5 md:h-[14px]" />
                   </button>
                 </div>
               </div>

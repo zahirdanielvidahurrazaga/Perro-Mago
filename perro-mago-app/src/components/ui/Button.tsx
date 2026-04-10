@@ -23,7 +23,7 @@ export function Button({
     'inline-flex items-center justify-center gap-2 font-semibold rounded-lg transition-all duration-200 active:scale-[0.97] select-none';
 
   const variants = {
-    primary: 'gold-gradient text-on-primary hover:brightness-110 shadow-lg shadow-primary/10',
+    primary: 'brand-gradient text-on-primary hover:brightness-110 shadow-lg shadow-primary/20',
     secondary: 'glass ghost-border text-on-surface hover:ghost-border-active hover:text-primary',
     ghost: 'text-primary hover:bg-surface-container-high bg-transparent',
     danger: 'bg-error-container text-on-error hover:brightness-110',

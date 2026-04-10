@@ -16,7 +16,7 @@ export function Card({ children, className, glass = false, glow = false, onClick
       className={cn(
         'rounded-xl p-4',
         glass ? 'glass ghost-border' : 'bg-surface-container-high',
-        glow && 'gold-glow',
+        glow && 'brand-glow',
         interactive && 'cursor-pointer transition-all duration-200 hover:ghost-border-active hover:brightness-105',
         onClick && 'cursor-pointer',
         className

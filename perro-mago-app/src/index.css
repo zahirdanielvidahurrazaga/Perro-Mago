@@ -5,16 +5,15 @@
    PERRO MAGO — Design System "Nocturnal Alchemist" (from Stitch)
    ============================================================================ */
 
-@theme {
-  /* ── Brand Colors ── */
-  --color-primary: #F6BE39;
-  --color-primary-container: #D4A017;
-  --color-on-primary: #402D00;
-  --color-on-primary-container: #503A00;
+  /* ── Brand Colors (Perro Mago Red) ── */
+  --color-primary: #EE1B1B;
+  --color-primary-container: #93000A;
+  --color-on-primary: #FFFFFF;
+  --color-on-primary-container: #FFDAD6;
 
-  --color-secondary: #E1C387;
-  --color-secondary-container: #584414;
-  --color-on-secondary: #402D00;
+  --color-secondary: #E5E2E1;
+  --color-secondary-container: #3E0000;
+  --color-on-secondary: #131313;
 
   /* ── Surface System ── */
   --color-background: #131313;
@@ -97,19 +96,19 @@ body {
 }
 
 .ghost-border-active {
-  border: 1px solid rgba(246, 190, 57, 0.2);
+  border: 1px solid rgba(238, 27, 27, 0.3);
 }
 
-.gold-gradient {
-  background: linear-gradient(135deg, #F6BE39 0%, #D4A017 100%);
+.brand-gradient {
+  background: linear-gradient(135deg, #EE1B1B 0%, #93000A 100%);
 }
 
-.gold-glow {
-  box-shadow: 0 0 40px rgba(246, 190, 57, 0.08);
+.brand-glow {
+  box-shadow: 0 0 40px rgba(238, 27, 27, 0.15);
 }
 
-.text-gold {
-  color: #F6BE39;
+.text-brand {
+  color: #EE1B1B;
 }
 
 /* ── Animations ── */

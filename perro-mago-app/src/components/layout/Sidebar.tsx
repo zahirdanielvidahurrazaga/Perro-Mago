@@ -3,7 +3,6 @@ import {
   LayoutDashboard,
   Package,
   History,
-  Sparkles,
 } from 'lucide-react';
 import { useUIStore } from '../../stores/useUIStore';
 import { cn } from '../../lib/utils';
@@ -20,18 +19,14 @@ export function Sidebar() {
   const setActivePage = useUIStore((s) => s.setActivePage);
 
   return (
-    <nav className="w-20 bg-surface-container-low flex flex-col items-center py-6 gap-2 shrink-0">
-      {/* Logo */}
-      <div className="mb-6 flex flex-col items-center gap-1">
-        <div className="w-12 h-12 rounded-xl gold-gradient flex items-center justify-center">
-          <Sparkles size={24} className="text-on-primary" />
-        </div>
-        <span className="text-[10px] font-bold text-primary tracking-wider">PERRO</span>
-        <span className="text-[10px] font-bold text-on-surface-variant -mt-1 tracking-wider">MAGO</span>
+    <nav className="fixed md:static bottom-0 left-0 right-0 z-40 md:w-20 bg-surface-container-low flex md:flex-col items-center justify-around md:justify-start md:py-6 h-16 md:h-auto gap-2 shrink-0 border-t md:border-t-0 md:border-r border-outline-variant/30">
+      {/* Logo (Desktop Only) */}
+      <div className="hidden md:flex mb-6 flex-col items-center gap-1">
+        <img src="/logo.png" alt="Perro Mago Logo" className="w-12 h-12 object-contain" />
       </div>
 
       {/* Nav Items */}
-      <div className="flex flex-col gap-1 flex-1">
+      <div className="flex md:flex-col gap-1 md:flex-1 w-full md:w-auto justify-around px-2 md:px-0">
         {navItems.map((item) => {
           const isActive = activePage === item.id;
           const Icon = item.icon;
@@ -41,7 +36,7 @@ export function Sidebar() {
               key={item.id}
               onClick={() => setActivePage(item.id)}
               className={cn(
-                'w-16 h-16 rounded-xl flex flex-col items-center justify-center gap-1 transition-all duration-200',
+                'flex-1 md:flex-none md:w-16 h-14 md:h-16 rounded-xl flex flex-col items-center justify-center gap-1 transition-all duration-200 relative',
                 isActive
                   ? 'bg-primary/10 text-primary'
                   : 'text-on-surface-variant hover:text-on-surface hover:bg-surface-container'
@@ -49,10 +44,13 @@ export function Sidebar() {
               title={item.label}
             >
               {isActive && (
-                <div className="absolute left-0 w-1 h-8 rounded-r-full bg-primary" />
+                <>
+                  <div className="hidden md:block absolute left-0 top-1/2 -translate-y-1/2 w-1 h-8 rounded-r-full bg-primary" />
+                  <div className="md:hidden absolute top-0 left-1/2 -translate-x-1/2 w-8 h-1 rounded-b-full bg-primary" />
+                </>
               )}
-              <Icon size={22} strokeWidth={isActive ? 2.5 : 1.5} />
-              <span className="text-[10px] font-medium">{item.label}</span>
+              <Icon size={20} strokeWidth={isActive ? 2.5 : 1.5} className="md:w-[22px] md:h-[22px]" />
+              <span className="text-[10px] sm:text-xs md:text-[10px] font-medium">{item.label}</span>
             </button>
           );
         })}

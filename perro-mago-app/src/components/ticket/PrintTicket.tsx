@@ -14,12 +14,7 @@ export function PrintTicket() {
       <div style={{ width: '80mm', padding: '4mm', fontFamily: 'monospace', fontSize: '12px', lineHeight: '1.5' }}>
         {/* Header */}
         <div style={{ textAlign: 'center', marginBottom: '8px' }}>
-          <svg width="50" height="50" viewBox="0 0 50 50" style={{ margin: '0 auto 4px' }}>
-            <circle cx="25" cy="25" r="22" fill="none" stroke="#000" strokeWidth="2" />
-            <text x="25" y="20" textAnchor="middle" fontSize="8" fontWeight="bold" fill="#000">PERRO</text>
-            <text x="25" y="32" textAnchor="middle" fontSize="8" fontWeight="bold" fill="#000">MAGO</text>
-            <text x="25" y="42" textAnchor="middle" fontSize="5" fill="#000">✨🐾</text>
-          </svg>
+          <img src="/logo.png" alt="Logo" style={{ width: '40px', height: '40px', objectFit: 'contain', margin: '0 auto 4px' }} />
           <div style={{ fontWeight: 'bold', fontSize: '16px' }}>{RESTAURANT_NAME}</div>
           <div style={{ fontSize: '10px' }}>{RESTAURANT_TAGLINE}</div>
         </div>
