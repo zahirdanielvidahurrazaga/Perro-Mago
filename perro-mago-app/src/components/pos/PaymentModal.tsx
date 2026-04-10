@@ -11,7 +11,7 @@ import type { PaymentMethod } from '../../types/database';
 
 const quickCashAmounts = [50, 100, 200, 500, 1000];
 
-export function PaymentModal() {
+export function PaymentModal({ onCloseMobile }: { onCloseMobile?: () => void } = {}) {
   const isOpen = useUIStore((s) => s.isPaymentModalOpen);
   const closeModal = useUIStore((s) => s.closePaymentModal);
   const items = useCartStore((s) => s.items);
@@ -61,6 +61,7 @@ export function PaymentModal() {
     setMethod('cash');
     setCashReceived('');
     closeModal();
+    if (onCloseMobile) onCloseMobile();
   };
 
   return (

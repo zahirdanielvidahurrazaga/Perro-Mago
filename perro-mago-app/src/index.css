@@ -5,6 +5,7 @@
    PERRO MAGO — Design System "Nocturnal Alchemist" (from Stitch)
    ============================================================================ */
 
+@theme {
   /* ── Brand Colors (Perro Mago Red) ── */
   --color-primary: #EE1B1B;
   --color-primary-container: #93000A;

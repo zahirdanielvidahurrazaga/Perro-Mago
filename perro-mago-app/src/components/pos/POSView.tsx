@@ -7,7 +7,7 @@ import { PaymentModal } from './PaymentModal';
 import { useProducts, useCategories } from '../../hooks/useProducts';
 import { useCartStore } from '../../stores/useCartStore';
 import { Spinner } from '../ui/Spinner';
-import { Search, ShoppingBag } from 'lucide-react';
+import { Search } from 'lucide-react';
 import { formatCurrency, cn } from '../../lib/utils';
 
 export function POSView() {
