@@ -13,8 +13,10 @@ export function AppShell({ children }: AppShellProps) {
   return (
     <div className="flex flex-col md:flex-row h-screen bg-background overflow-hidden relative">
       {/* Mobile TopBar */}
-      <div className="md:hidden flex items-center justify-center p-3 bg-surface-container-low border-b border-outline-variant/30 shrink-0">
-        <img src="/logo.png" alt="Perro Mago Logo" className="h-8 object-contain" />
+      <div className="md:hidden flex items-center justify-center py-2 bg-surface-container-low border-b border-outline-variant/30 shrink-0">
+        <div className="bg-white rounded-full p-0.5 shadow-sm">
+          <img src="/logo.png" alt="Perro Mago Logo" className="h-10 w-10 object-contain rounded-full" />
+        </div>
       </div>
 
       <Sidebar />

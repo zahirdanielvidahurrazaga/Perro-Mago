@@ -34,27 +34,30 @@ export function POSView() {
       {/* Left: Product Grid */}
       <div className="flex-1 flex flex-col overflow-hidden">
         {/* Header */}
-        <div className="px-6 py-4 flex items-center gap-4 bg-surface-container-low/50">
-          <h1 className="text-lg font-bold text-primary shrink-0">Punto de Venta</h1>
+        <div className="p-4 md:px-6 md:py-4 flex flex-col gap-4 bg-surface-container-low/50">
+          <div className="flex items-center justify-between gap-4">
+            <h1 className="text-xl font-bold text-primary shrink-0">Punto de Venta</h1>
+            {/* Search */}
+            <div className="relative w-full max-w-[200px] md:max-w-xs md:ml-auto">
+              <Search
+                size={16}
+                className="absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant"
+              />
+              <input
+                type="text"
+                placeholder="Buscar..."
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                className="w-full pl-9 pr-4 py-2 text-sm bg-surface-container-lowest rounded-lg text-on-surface placeholder:text-on-surface-variant/50 outline-none focus:ring-1 focus:ring-primary"
+              />
+            </div>
+          </div>
           
-          <CategoryTabs
-            categories={categories || []}
-            activeCategory={activeCategory}
-            onSelect={setActiveCategory}
-          />
-
-          {/* Search */}
-          <div className="relative ml-auto">
-            <Search
-              size={16}
-              className="absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant"
-            />
-            <input
-              type="text"
-              placeholder="Buscar..."
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-              className="pl-9 pr-4 py-2 text-sm bg-surface-container-lowest rounded-lg text-on-surface placeholder:text-on-surface-variant/50 outline-none focus:ring-1 focus:ring-primary w-48 transition-all focus:w-56"
+          <div className="-mx-4 px-4 md:mx-0 md:px-0">
+            <CategoryTabs
+              categories={categories || []}
+              activeCategory={activeCategory}
+              onSelect={setActiveCategory}
             />
           </div>
         </div>
@@ -85,7 +88,7 @@ export function POSView() {
       {!mobileCartOpen && cartItemCount > 0 && (
         <button
           onClick={() => setMobileCartOpen(true)}
-          className="lg:hidden fixed bottom-[80px] right-4 left-24 md:left-24 sm:left-auto bg-primary text-on-primary rounded-xl p-4 shadow-lg flex items-center justify-between z-40 brand-gradient mx-auto max-w-sm sm:w-auto"
+          className="lg:hidden fixed bottom-20 left-4 right-4 bg-primary text-on-primary rounded-xl p-4 shadow-lg flex items-center justify-between z-40 brand-gradient mx-auto max-w-sm"
         >
           <div className="flex items-center gap-2">
             <div className="bg-on-primary/20 rounded-full w-6 h-6 flex items-center justify-center text-xs font-bold">
