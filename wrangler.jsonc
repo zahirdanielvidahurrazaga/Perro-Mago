@@ -1,0 +1,14 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "perromago",
+  "compatibility_date": "2026-04-10",
+  "observability": {
+    "enabled": true
+  },
+  "assets": {
+    "directory": "perro-mago-app"
+  },
+  "compatibility_flags": [
+    "nodejs_compat"
+  ]
+}
