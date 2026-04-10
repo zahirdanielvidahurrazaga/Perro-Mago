@@ -151,12 +151,12 @@ export function PaymentModal({ onCloseMobile }: { onCloseMobile?: () => void } =
               />
               
               {/* Quick amounts */}
-              <div className="flex gap-2">
+              <div className="flex gap-2 overflow-x-auto pb-2 -mx-1 px-1 no-scrollbar">
                 {quickCashAmounts.map((amount) => (
                   <button
                     key={amount}
                     onClick={() => setCashReceived(amount.toString())}
-                    className="flex-1 py-2.5 rounded-lg bg-surface-container-high text-on-surface-variant text-sm font-medium hover:bg-surface-container-highest hover:text-on-surface transition-colors font-mono"
+                    className="flex-1 min-w-[70px] py-2.5 rounded-lg bg-surface-container-high text-on-surface-variant text-sm font-medium hover:bg-surface-container-highest hover:text-on-surface transition-colors font-mono whitespace-nowrap"
                   >
                     ${amount}
                   </button>

@@ -24,8 +24,9 @@ export function TopProductsTable() {
           Sin datos de ventas aún
         </div>
       ) : (
-        <div className="space-y-1">
-          {/* Header */}
+        <div className="overflow-x-auto -mx-5 px-5 md:mx-0 md:px-0 hide-scrollbar pb-2">
+          <div className="space-y-1 min-w-[500px]">
+            {/* Header */}
           <div className="grid grid-cols-12 gap-2 px-3 py-2 text-xs font-medium text-on-surface-variant uppercase tracking-wider">
             <span className="col-span-1">#</span>
             <span className="col-span-5">Producto</span>
@@ -53,6 +54,7 @@ export function TopProductsTable() {
               </span>
             </div>
           ))}
+        </div>
         </div>
       )}
     </div>

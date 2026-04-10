@@ -47,7 +47,7 @@ export function ProductCard({ product }: ProductCardProps) {
   return (
     <button
       onClick={handleClick}
-      className="group bg-surface-container-high rounded-xl p-4 text-left transition-all duration-200 hover:ghost-border-active hover:brightness-105 active:scale-[0.97] flex flex-col min-h-[160px] relative overflow-hidden"
+      className="group bg-surface-container-high rounded-xl p-3 md:p-4 text-left transition-all duration-200 hover:ghost-border-active hover:brightness-105 active:scale-[0.97] flex flex-col min-h-[160px] relative overflow-hidden"
     >
       {/* Background gradient */}
       <div

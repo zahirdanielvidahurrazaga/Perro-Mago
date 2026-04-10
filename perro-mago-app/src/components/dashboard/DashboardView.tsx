@@ -21,7 +21,7 @@ export function DashboardView() {
         <DateFilter />
       </div>
 
-      <div className="p-6 space-y-6">
+      <div className="p-4 md:p-6 space-y-4 md:space-y-6">
         {/* KPIs */}
         <KPIRow />
 
