@@ -38,9 +38,10 @@ export function OrderHistoryView() {
             <p className="text-sm">No hay órdenes registradas</p>
           </div>
         ) : (
-          <div className="space-y-2">
-            {orders.map((order) => (
-              <div
+          <div className="overflow-x-auto pb-2">
+            <div className="space-y-2 min-w-[700px]">
+              {orders.map((order) => (
+                <div
                 key={order.id}
                 className="bg-surface-container-high rounded-xl p-4 flex items-center gap-4 hover:bg-surface-container-highest transition-colors"
               >
@@ -112,6 +113,7 @@ export function OrderHistoryView() {
               </div>
             ))}
           </div>
+        </div>
         )}
       </div>
     </div>

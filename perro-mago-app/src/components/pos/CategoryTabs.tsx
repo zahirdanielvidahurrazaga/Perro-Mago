@@ -16,7 +16,7 @@ const categoryIcons: Record<string, React.ReactNode> = {
 
 export function CategoryTabs({ categories, activeCategory, onSelect }: CategoryTabsProps) {
   return (
-    <div className="flex items-center gap-1">
+    <div className="flex items-center gap-2 overflow-x-auto pb-2 w-full no-scrollbar">
       <button
         onClick={() => onSelect(null)}
         className={cn(

@@ -45,8 +45,9 @@ export function InventoryView() {
             <Spinner size={32} />
           </div>
         ) : (
-          <div className="bg-surface-container-high rounded-xl overflow-hidden">
-            {/* Table Header */}
+          <div className="bg-surface-container-high rounded-xl overflow-hidden overflow-x-auto">
+            <div className="min-w-[800px]">
+              {/* Table Header */}
             <div className="grid grid-cols-12 gap-4 px-5 py-3 text-xs font-medium text-on-surface-variant uppercase tracking-wider bg-surface-container-highest">
               <span className="col-span-4">Insumo</span>
               <span className="col-span-2 text-center">Unidad</span>
@@ -98,6 +99,7 @@ export function InventoryView() {
                 );
               })}
             </div>
+          </div>
           </div>
         )}
       </div>
