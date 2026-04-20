@@ -1,5 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
-import { supabase } from '../lib/supabase';
+import { supabase, IS_DEMO_MODE } from '../lib/supabase';
+import { mockDataService } from '../lib/mockData';
 import { useDateFilterStore } from '../stores/useDateFilterStore';
 import type { DashboardKPIs } from '../types/database';
 
@@ -14,6 +15,8 @@ export function useDashboardKPIs() {
   return useQuery({
     queryKey: ['dashboard', 'kpis', activeFilter, range.start.toISOString()],
     queryFn: async () => {
+      if (IS_DEMO_MODE) return mockDataService.getDashboardKPIs();
+
       const { data, error } = await supabase.rpc('get_dashboard_kpis', {
         p_start_date: range.start.toISOString(),
         p_end_date: range.end.toISOString(),
@@ -36,6 +39,8 @@ export function useSalesByHour() {
   return useQuery({
     queryKey: ['dashboard', 'sales-by-hour', activeFilter, range.start.toISOString()],
     queryFn: async () => {
+      if (IS_DEMO_MODE) return mockDataService.getSalesByHour();
+
       const { data, error } = await supabase.rpc('get_sales_by_hour', {
         p_start_date: range.start.toISOString(),
         p_end_date: range.end.toISOString(),
@@ -65,6 +70,8 @@ export function useSalesByCategory() {
   return useQuery({
     queryKey: ['dashboard', 'sales-by-category', activeFilter, range.start.toISOString()],
     queryFn: async () => {
+      if (IS_DEMO_MODE) return mockDataService.getSalesByCategory();
+
       const { data, error } = await supabase.rpc('get_sales_by_category', {
         p_start_date: range.start.toISOString(),
         p_end_date: range.end.toISOString(),
@@ -85,6 +92,8 @@ export function useTopProducts() {
   return useQuery({
     queryKey: ['dashboard', 'top-products', activeFilter, range.start.toISOString()],
     queryFn: async () => {
+      if (IS_DEMO_MODE) return mockDataService.getTopProducts();
+
       const { data, error } = await supabase.rpc('get_top_products', {
         p_start_date: range.start.toISOString(),
         p_end_date: range.end.toISOString(),
@@ -97,3 +106,4 @@ export function useTopProducts() {
     staleTime: 60 * 1000,
   });
 }
+

@@ -1,5 +1,6 @@
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
-import { supabase } from '../lib/supabase';
+import { supabase, IS_DEMO_MODE } from '../lib/supabase';
+import { mockDataService } from '../lib/mockData';
 import type { Order, OrderItem, PaymentMethod } from '../types/database';
 import type { CartItem } from '../types/pos';
 import { getCartItemUnitPrice } from '../types/pos';
@@ -12,6 +13,8 @@ export function useOrders(limit = 50) {
   return useQuery({
     queryKey: ['orders', limit],
     queryFn: async () => {
+      if (IS_DEMO_MODE) return mockDataService.getOrders(limit);
+
       const { data, error } = await supabase
         .from('orders')
         .select(`
@@ -41,6 +44,8 @@ export function useCreateOrder() {
 
   return useMutation({
     mutationFn: async (cartItems: CartItem[]) => {
+      if (IS_DEMO_MODE) return mockDataService.createOrder(cartItems);
+
       const subtotal = cartItems.reduce(
         (sum, item) => sum + getCartItemUnitPrice(item) * item.quantity,
         0
@@ -110,7 +115,7 @@ export function useCreateOrder() {
   });
 }
 
-/** Process payment via RPC */
+/** Process payment */
 export function useProcessPayment() {
   const queryClient = useQueryClient();
 
@@ -124,6 +129,8 @@ export function useProcessPayment() {
       method: PaymentMethod;
       cashReceived?: number;
     }) => {
+      if (IS_DEMO_MODE) return mockDataService.processPayment(orderId, method, cashReceived);
+
       const { data, error } = await supabase.rpc('process_order_payment', {
         p_order_id: orderId,
         p_payment_method: method,
@@ -169,6 +176,17 @@ export function useProcessPayment() {
       closePaymentModal();
       
       // Fetch the complete order for the ticket
+      if (IS_DEMO_MODE) {
+        const orders = await mockDataService.getOrders(50);
+        const order = orders.find(o => o.id === orderId);
+        if (order) {
+            setLastCompletedOrder(order);
+            setShowTicket(true);
+            setTimeout(() => window.print(), 500);
+        }
+        return;
+      }
+
       const { data: completedOrder } = await supabase
         .from('orders')
         .select(`
@@ -198,3 +216,4 @@ export function useProcessPayment() {
     },
   });
 }
+

@@ -1,11 +1,14 @@
 import { useQuery } from '@tanstack/react-query';
-import { supabase } from '../lib/supabase';
+import { supabase, IS_DEMO_MODE } from '../lib/supabase';
+import { mockDataService } from '../lib/mockData';
 import type { Product, Category, ModifierGroup } from '../types/database';
 
 export function useProducts() {
   return useQuery({
     queryKey: ['products'],
     queryFn: async () => {
+      if (IS_DEMO_MODE) return mockDataService.getProducts();
+
       const { data, error } = await supabase
         .from('products')
         .select('*, category:categories(*)')
@@ -23,6 +26,8 @@ export function useCategories() {
   return useQuery({
     queryKey: ['categories'],
     queryFn: async () => {
+      if (IS_DEMO_MODE) return mockDataService.getCategories();
+
       const { data, error } = await supabase
         .from('categories')
         .select('*')
@@ -39,6 +44,8 @@ export function useModifierGroups() {
   return useQuery({
     queryKey: ['modifier-groups'],
     queryFn: async () => {
+      if (IS_DEMO_MODE) return mockDataService.getModifierGroups();
+
       const { data, error } = await supabase
         .from('modifier_groups')
         .select('*, modifiers:product_modifiers(*)')
@@ -50,3 +57,4 @@ export function useModifierGroups() {
     staleTime: 10 * 60 * 1000,
   });
 }
+

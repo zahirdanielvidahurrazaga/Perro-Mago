@@ -1,16 +1,17 @@
 import { useEffect } from 'react';
 import { useQueryClient } from '@tanstack/react-query';
-import { supabase } from '../lib/supabase';
+import { supabase, IS_DEMO_MODE } from '../lib/supabase';
 
 /**
- * Subscribes to Supabase Realtime events for inventory_items, orders, and restock_log.
- * When any of these tables change, the relevant React Query caches are invalidated,
- * causing automatic re-fetches across all connected screens.
+ * Subscribes to Supabase Realtime events.
+ * Disabled in Demo Mode.
  */
 export function useRealtimeSync() {
   const queryClient = useQueryClient();
 
   useEffect(() => {
+    if (IS_DEMO_MODE) return;
+
     const channel = supabase
       .channel('perro-mago-realtime')
       .on(
@@ -42,3 +43,4 @@ export function useRealtimeSync() {
     };
   }, [queryClient]);
 }
+

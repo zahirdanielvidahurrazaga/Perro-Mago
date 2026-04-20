@@ -1,5 +1,6 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { supabase } from '../lib/supabase';
+import { supabase, IS_DEMO_MODE } from '../lib/supabase';
+import { mockDataService } from '../lib/mockData';
 import { useUIStore } from '../stores/useUIStore';
 
 export function useRestock() {
@@ -15,6 +16,8 @@ export function useRestock() {
       quantityAdded: number;
       notes?: string;
     }) => {
+      if (IS_DEMO_MODE) return mockDataService.restockInventory(inventoryItemId, quantityAdded, notes);
+
       const { data, error } = await supabase.rpc('restock_inventory', {
         p_inventory_item_id: inventoryItemId,
         p_quantity_added: quantityAdded,
@@ -37,3 +40,4 @@ export function useRestock() {
     },
   });
 }
+

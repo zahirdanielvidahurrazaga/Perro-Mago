@@ -1,11 +1,14 @@
 import { useQuery } from '@tanstack/react-query';
-import { supabase } from '../lib/supabase';
+import { supabase, IS_DEMO_MODE } from '../lib/supabase';
+import { mockDataService } from '../lib/mockData';
 import type { InventoryItem } from '../types/database';
 
 export function useInventory() {
   return useQuery({
     queryKey: ['inventory'],
     queryFn: async () => {
+      if (IS_DEMO_MODE) return mockDataService.getInventory();
+
       const { data, error } = await supabase
         .from('inventory_items')
         .select('*')
@@ -14,7 +17,7 @@ export function useInventory() {
       if (error) throw error;
       return data as InventoryItem[];
     },
-    staleTime: 30 * 1000, // 30 seconds — refreshed frequently via realtime
+    staleTime: 30 * 1000, 
   });
 }
 
@@ -22,6 +25,11 @@ export function useLowStockItems() {
   return useQuery({
     queryKey: ['inventory', 'low-stock'],
     queryFn: async () => {
+      if (IS_DEMO_MODE) {
+        const all = await mockDataService.getInventory();
+        return all.filter(item => item.current_stock <= item.reorder_threshold);
+      }
+
       const { data, error } = await supabase
         .from('inventory_items')
         .select('*')
@@ -29,7 +37,6 @@ export function useLowStockItems() {
         .order('current_stock');
       
       if (error) {
-        // Fallback: fetch all and filter client-side
         const { data: all, error: e2 } = await supabase
           .from('inventory_items')
           .select('*')
@@ -44,3 +51,4 @@ export function useLowStockItems() {
     staleTime: 30 * 1000,
   });
 }
+
